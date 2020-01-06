@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Cliente} from "./cliente";
 import {ClienteService} from "./cliente.service";
 import swal from 'sweetalert2';
+import {AuthService} from "../usuarios/auth.service";
 
 @Component({
   selector: 'app-clientes',
@@ -10,7 +11,8 @@ import swal from 'sweetalert2';
 export class ClientesComponent implements OnInit {
   clientes:Cliente[];
 
-  constructor(private clienteService:ClienteService) { }
+  constructor(private clienteService:ClienteService,
+              private authService:AuthService) { }
 
   ngOnInit() {
     this.clienteService.getClientes().subscribe(

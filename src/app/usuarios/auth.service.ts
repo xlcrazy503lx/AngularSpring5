@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Usuario} from "./usuario";
-import {catchError} from "rxjs/operators";
+import {catchError, ignoreElements} from "rxjs/operators";
 import swal from "sweetalert2";
 import {getToken} from "codelyzer/angular/styles/cssLexer";
 
@@ -68,7 +68,7 @@ export class AuthService {
 
   guardarToken(accessToken:string):void{
     this._token = accessToken;
-    console.log('acces token '+accessToken);
+    console.log('access token '+accessToken);
     sessionStorage.setItem('token',accessToken);
   }
 
@@ -83,5 +83,17 @@ export class AuthService {
   isAuthenticated():boolean{
     let payload = this.obtenerDatosToken(this.token);
     return payload != null && payload.user_name && payload.user_name.length > 0;
+  }
+
+  hasRole(role:string):boolean{
+    return this.usuario.roles.includes(role);
+  }
+
+  logout():void{
+    this._token = null;
+    this._usuario = null;
+    //sessionStorage.clear();
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
   }
 }
