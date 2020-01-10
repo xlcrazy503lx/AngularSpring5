@@ -16,11 +16,11 @@
     </ul>
 
     <ul class="navbar-nav navbar-right ">
-       <li *ngIf="!authService.isAuthenticated()">
+       <li *ngIf="!authService.isAuthenticated()" data-toggle="collapse" data-target=".navbar-collapse.show">
          <a [routerLink]="['/login']" class="btn btn-outline-primary">Login</a>
        </li>
 
-      <li *ngIf="authService.isAuthenticated()" class="dropdown">
+      <li *ngIf="authService.isAuthenticated()" class="dropdown" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{authService.usuario.username}}
         </a>
